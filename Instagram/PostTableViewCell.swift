@@ -39,12 +39,14 @@ class PostTableViewCell: UITableViewCell {
         
         // コメントの表示
         var comment_list: String = ""
-        postData.comments.forEach { comment_str in
-            var comment = comment_str.components(separatedBy: "_")
-            if comment_list == "" {
-                comment_list = "[" + comment[2] + "] " + comment[3] + " (" + comment[1] + ")"
-            } else {
-                comment_list = comment_list +  "[" + comment[2] + "] " + comment[3] + " (" + comment[1] + ")"
+        var comment: [String : String] = [:]
+        postData.comments.forEach { comment in
+            if comment["name"] != nil {
+                if comment_list == "" {
+                    comment_list = "[" + comment["name"]! + "] " + comment["message"]! + " (" + comment["date"]! + ")"
+                } else {
+                    comment_list = comment_list +  "\n[" + comment["name"]! + "] " + comment["message"]! + " (" + comment["date"]! + ")"
+                }
             }
         }
         
