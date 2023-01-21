@@ -44,7 +44,7 @@ print("EnterCommentViewController")
             commentRef.setData(commentDic)
             
             // postsに更新データを書き込む
-            var newComment = String(myid) + "_" + dateString + "_" + dispName + "_" + String(self.commentForm.text!)
+            var newComment = ["date": dateString, "name": dispName, "message": self.commentForm.text!]
             updateValue = FieldValue.arrayUnion([newComment])
             let postRef = Firestore.firestore().collection(Const.PostPath).document(postData.id)
             postRef.updateData(["comments": updateValue])
